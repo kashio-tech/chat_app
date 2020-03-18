@@ -7,9 +7,54 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/9323dd025d.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="wrapper">
+        <nav class="navbar navbar-light bg-light">
+            <div class="navbar-brand ">
+                <%= link_to "chat_app",root_path %>
+            </div>
+            <form class="form-inline">
+                <!-- ユーザーがログインしている時  -->
+                <% if  user_signed_in? %>
+                <ul class="nav navbar ml-auto">
+                    <!-- リンクのみ -->
+<!--                     <li class="nav-item">
+                        <%#= link_to "  スレッド作成", new_photo_path,  class: 'fas fa-camera mr-4 text-dark' %>
+                    </li> -->
+                    <li class="nav-item">
+                        <%= link_to "   Logout", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt mr-4 text-dark" %>
+                    </li>
+<!--                     <li>
+                        <%#= render 'layouts/search' %>
+                    </li> -->
+                </ul>
+                
+                <!-- ログインしていない時 -->
+                <% else %>
+                <ul class="nav navbar ml-auto">
+                    <!-- リンクのみ -->
+                    <li>
+                        <%= link_to "   Sign-up", new_user_registration_path, class: 'fas fa-user-plus mr-4 text-dark' %>
+                    </li>
+                    <li>
+                        <%= link_to "   Login", new_user_session_path, class: 'fas fa-sign-in-alt mr-4 text-dark' %>
+                    </li>
+<!--                     <li>
+                        <%#= render 'layouts/search' %>
+                    </li> -->
+                </ul>
+                <% end %>
+            </form>
+        </nav>
+        <div class="container-fluid mb-4">
+            <%= yield %>
+        </div>
+        <footer class="align-center  text-center">
+            <h6 class="text-center">@CopyRight hoge.inc</h6>
+        </footer>
+    </div>
   </body>
 </html>
